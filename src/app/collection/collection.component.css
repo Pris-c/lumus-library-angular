@@ -1,6 +1,7 @@
 .hero-section{
-  background-color: #E89A2F;
-  padding:60px 0
+  background:url('src/assets/div-pattern2.png') top left repeat-x;
+  padding:60px 0;
+  font-size: 40px
 }
 .div-collection{
   padding:1px 0;
@@ -13,10 +14,14 @@
 }
 .page-section h2 {
   color: #f49500;
-  font-size: 2em;
+  font-size: 1.2em;
+}
+.page-section span {
+  color: #f49500;
+  font-size: 1em;
 }
 .page-section p {
-  font-size: 1.1em;
+  font-size: 1em;
   line-height: 1.6em;
   margin: 0 0 0px;
 }

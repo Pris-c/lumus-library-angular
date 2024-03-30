@@ -1,40 +1,22 @@
 <div class="div-collection"></div>
 <section class="hero-section section">
   <div class="container">
-    <h1 class="responsive-headline text-center" style="font-size: 40px;">Lumus Collection</h1>
+    <h1 class="responsive-headline text-center">Lumus Collection</h1>
   </div>
 </section>
 <div class="div-collection"></div>
 
-<section class="page-section darkBg pDark">
+<section  *ngFor="let volume of volumes" class="page-section darkBg pDark">
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <h2>Title</h2>
-        <h3>Authors</h3>
-        <p>Categories</p>
-        <ul>
-          <li>category 1</li>
-          <li>category 2</li>
-        </ul>
-        <p>Publication</p>
+        <h2>{{volume.title}}</h2>
+        <span *ngFor="let author of volume.authors">{{author}}, </span>
+        <p>Categories: {{volume.categories}}</p>
+        <p>Publication: {{volume.publishedDate}}</p>
+        <p>ISBN10: {{volume.isbn10}} || ISBN13: {{volume.isbn13}} </p>
       </div>
     </div>
   </div>
 </section>
-<section class="page-section darkBg pDark">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <h2>Title</h2>
-        <h3>Authors</h3>
-        <p>Categories</p>
-        <ul>
-          <li>category 1</li>
-          <li>category 2</li>
-        </ul>
-        <p>Publication</p>
-      </div>
-    </div>
-  </div>
-</section>
+
