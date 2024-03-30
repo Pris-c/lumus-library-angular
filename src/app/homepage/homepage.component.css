@@ -47,10 +47,10 @@
 	border-radius: 0px;
 }
 .div-pattern2{
-background:url('src/app/homepage/div-pattern2.png') top left repeat-x;
-height:30px;
-width:100%;
-display:block;
+  background:url('src/assets/div-pattern2.png') top left repeat-x;
+  height:30px;
+  width:100%;
+  display:block;
 }
 
 

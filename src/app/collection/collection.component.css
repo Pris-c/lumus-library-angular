@@ -1,0 +1,42 @@
+.hero-section{
+  background-color: #E89A2F;
+  padding:60px 0
+}
+.div-collection{
+  padding:1px 0;
+  font-size: 2em;
+}
+.page-section {
+  width: 100%;
+  height: auto;
+  padding: 35px 0;
+}
+.page-section h2 {
+  color: #f49500;
+  font-size: 2em;
+}
+.page-section p {
+  font-size: 1.1em;
+  line-height: 1.6em;
+  margin: 0 0 0px;
+}
+.page-section ul li{
+  color: #6D6D6D;
+}
+.darkBg {
+  background: #000;
+}
+.pDark p {
+  color: #6D6D6D;
+}
+.pDark h3 {
+  color: #BEBEBE;
+}
+.heading {
+  padding: 3px 10px;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  display: block;
+}
+
+
