@@ -1,16 +1,27 @@
 .hero-section{
-  background:url('src/assets/div-pattern2.png') top left repeat-x;
-  padding:60px 0;
-  font-size: 40px
+  background:url('src/assets/header_bg.jpg') top left repeat-x;
+  background-attachment: relative;
+	background-position: center center;
+  padding:15px 0;
+  font-size: 40px;
+  color: #ffffff;
+	font-size: 50px;
+	font-weight: 400;
+	text-align: center;
+	letter-spacing: 3px;
 }
 .div-collection{
-  padding:1px 0;
+  padding: 2px 0;
+  font-size: 2em;
+}
+.div-form{
+  padding: 1px 0;
   font-size: 2em;
 }
 .page-section {
   width: 100%;
   height: auto;
-  padding: 35px 0;
+  padding: 15px 0;
 }
 .page-section h2 {
   color: #f49500;

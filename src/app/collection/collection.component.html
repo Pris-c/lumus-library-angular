@@ -1,20 +1,43 @@
 <div class="div-collection"></div>
-<section class="hero-section section">
-  <div class="container">
-    <h1 class="responsive-headline text-center">Lumus Collection</h1>
-  </div>
+<section class="hero-section">
+
+
+
+  <div class="div-form"></div>
+      <div class="container-xl">
+        <form>
+          <div>
+            <select name="selectedField" [(ngModel)]="selectedField" class="form-select form-select-m mb-3">
+              <option disabled selected>Search by..</option>
+              <option *ngFor="let o of options" [ngValue]="o.value">{{o.name}}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <input type="text" name="userInput" class="form-control" [(ngModel)]="userInput" (ngModelChange)="findBy()">
+          </div>
+            <div class="text-end">
+              <button type="button" class="btn btn-warning">Search</button>
+            </div>
+        </form>
+      </div>
+    <div class="div-form"></div>
+      <div class="container">
+        <h1 class="responsive-headline text-center">Lumus Collection</h1>
+      </div>
+
 </section>
+
 <div class="div-collection"></div>
 
-<section  *ngFor="let volume of volumes" class="page-section darkBg pDark">
+<section  bg-dark *ngFor="let volume of volumes" class="page-section darkBg pDark">
   <div class="container">
     <div class="row">
       <div class="col-md-8">
         <h2>{{volume.title}}</h2>
         <span *ngFor="let author of volume.authors">{{author}}, </span>
-        <p>Categories: {{volume.categories}}</p>
-        <p>Publication: {{volume.publishedDate}}</p>
-        <p>ISBN10: {{volume.isbn10}} || ISBN13: {{volume.isbn13}} </p>
+        <p>ISBN10: {{volume.isbn10}} | ISBN13: {{volume.isbn13}} </p>
+        <p>{{volume.categories}}</p>
+        <p>{{volume.publishedDate}}</p>
       </div>
     </div>
   </div>
