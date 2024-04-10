@@ -1,14 +1,12 @@
 <div class="div-collection"></div>
 <section class="hero-section">
 
-
-
   <div class="div-form"></div>
       <div class="container-xl">
         <form>
           <div>
             <select name="selectedField" [(ngModel)]="selectedField" class="form-select form-select-m mb-3">
-              <option disabled selected>Search by..</option>
+              <option name="Search by.." value="Search by.." disabled selected>Search by..</option>
               <option *ngFor="let o of options" [ngValue]="o.value">{{o.name}}</option>
             </select>
           </div>
