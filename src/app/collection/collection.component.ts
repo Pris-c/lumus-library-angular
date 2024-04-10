@@ -1,6 +1,6 @@
-import { Volume } from './../volume';
+import { Volume } from '../data-types';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ApiService } from '../api.service';
+import { ApiService } from '../service/api.service';
 
 @Component({
   selector: 'app-collection',

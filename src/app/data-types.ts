@@ -8,3 +8,12 @@ export interface Volume {
   publishedDate: string;
   language: string
 }
+
+export interface LibraryUser{
+  login: String;
+  password: String;
+}
+
+export interface UserToken{
+  token: String;
+}
