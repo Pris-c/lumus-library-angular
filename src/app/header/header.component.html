@@ -14,12 +14,20 @@
       </div>
     </div>
 
+
+    <div *ngIf="validToken">
       <div class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0 ">
-        <a href="/login">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
-        </a>
-        <button type="button" class="btn btn-warning">Sign-up</button>
+          <button (click)="logout()" type="button" class="btn btn-outline-light me-2">Logout</button>
       </div>
+    </div>
+
+    <div *ngIf="!validToken">
+      <div class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0 ">
+          <button (click)="goToLogin()" type="button" class="btn btn-outline-light me-2">Login</button>
+        <button  type="button" class="btn btn-warning">Sign-up</button>
+      </div>
+    </div>
+
     </div>
 
 </nav>

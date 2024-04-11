@@ -36,7 +36,6 @@ export class CollectionComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
   this.apiService.getVolumes().subscribe((data)=>{
-    console.log(data);
     this.volumes = this.volumesDB = data;
     console.log(this.volumesDB);
   })}

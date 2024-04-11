@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenService } from '../service/token.service';
+import { ApiService } from '../service/api.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-header',
@@ -7,9 +11,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  validToken = false;
+
+
+  constructor(
+    private tokenService: TokenService,
+    private apiService: ApiService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.validToken = this.tokenService.isValidToken();
+
+    // Subscribe for future changes
+    this.tokenService.subscribe$.subscribe(data => {
+      this.validToken = data;
+    });
+  }
+
+  goToLogin() {
+    this.router.navigate(["/login"])
+  }
+
+  logout(){
+    console.log("Called logout")
+    this.apiService.logout();
+    this.validToken = false;
+    this.router.navigate([""]);
   }
 
 }

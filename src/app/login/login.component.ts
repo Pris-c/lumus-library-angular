@@ -3,6 +3,7 @@ import { ApiService } from '../service/api.service';
 import { LibraryUser, UserToken } from '../data-types';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TokenService } from '../service/token.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -28,7 +29,11 @@ export class LoginComponent implements OnInit {
   });
 
 
-  constructor(private apiService: ApiService, private tokenService: TokenService, private fb: FormBuilder) { }
+  constructor(
+    private apiService: ApiService,
+    private tokenService: TokenService,
+    private fb: FormBuilder,
+    private router: Router) { }
 
   ngOnInit(): void {
       this.form;
@@ -39,11 +44,13 @@ export class LoginComponent implements OnInit {
     this.apiService.login(user).subscribe((data) => {
       this.tokenService.saveToken(JSON.stringify(data.token));
     })
+    this.tokenService.emitData(true);
+    this.router.navigate([""]);
   }
+
 
   callLogin(){
     if (this.form.valid) {
-      //console.log("Valid form")
       const user: LibraryUser = this.form.value;
       this.login(user);
     }
