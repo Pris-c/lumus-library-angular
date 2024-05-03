@@ -13,6 +13,9 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  failLogin: boolean = false;
+  invalidForm: boolean = false;
+
   token: UserToken = {
     token: ""
   }
@@ -36,23 +39,33 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+      this.failLogin = false;
+      this.invalidForm = false;
       this.form;
   }
 
   login(user: LibraryUser) {
-    console.log("Called login")
     this.apiService.login(user).subscribe((data) => {
-      this.tokenService.saveToken(JSON.stringify(data.token));
+      if (data == null){
+        this.failLogin = true;
+      }
+      else{
+        this.tokenService.saveToken(JSON.stringify(data.token));
+        this.tokenService.emitData(true);
+        this.router.navigate([""]);
+      }
     })
-    this.tokenService.emitData(true);
-    this.router.navigate([""]);
   }
 
 
   callLogin(){
+    this.invalidForm = false;
+    this.failLogin = false;
     if (this.form.valid) {
       const user: LibraryUser = this.form.value;
       this.login(user);
+    } else {
+      this.invalidForm = true;
     }
   }
 

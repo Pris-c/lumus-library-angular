@@ -32,6 +32,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(["/login"])
   }
 
+    goToSignin() {
+    this.router.navigate(["/signin"])
+  }
+
   logout(){
     console.log("Called logout")
     this.apiService.logout();
