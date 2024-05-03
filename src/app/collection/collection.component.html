@@ -22,21 +22,17 @@
       <div class="container">
         <h1 class="responsive-headline text-center">Lumus Collection</h1>
       </div>
-
 </section>
 
 <div class="div-collection"></div>
 
 <section  bg-dark *ngFor="let volume of volumes" class="page-section darkBg pDark">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <h2>{{volume.title}}</h2>
-        <span *ngFor="let author of volume.authors">{{author}}, </span>
-        <p>ISBN10: {{volume.isbn10}} | ISBN13: {{volume.isbn13}} </p>
-        <p>{{volume.categories}}</p>
-        <p>{{volume.publishedDate}}</p>
-      </div>
+  <div class="card bg-dark">
+    <div class="card-body">
+      <h5 class="card-title text-light">{{volume.title}}</h5>
+      <span class="card-text">{{volume.authors.join(', ')}}</span>
+      <p>ISBN10: {{volume.isbn10}} | ISBN13: {{volume.isbn13}} </p>
+      <p>{{volume.publishedDate}}</p>
     </div>
   </div>
 </section>
