@@ -1,4 +1,4 @@
-import { Volume, LibraryUser, UserToken } from '../data-types';
+import { Volume, LibraryUser, UserToken, UserRegister } from '../data-types';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { TokenService } from './token.service';
@@ -35,6 +35,25 @@ export class ApiService {
 
   logout() {
     this.tokenService.deleteToken();
+  }
+
+  register(user: UserRegister): Observable<number> {
+    console.log("Service register called");
+    // let status : number = 0;
+
+    return this.httpClient.post('http://localhost:8080/auth/register', user, {observe: 'response'})
+    .pipe(
+      map(response => {
+        console.log("Response: " + response);
+        console.log("Status: " + response.status);
+        return response.status;
+      }),
+
+      catchError((error: HttpErrorResponse) => {
+        console.log("Error status: ", error.status);
+        return of(error.status);
+      }),
+    );
   }
 
 }

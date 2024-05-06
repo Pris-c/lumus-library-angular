@@ -14,6 +14,12 @@ export interface LibraryUser{
   password: String;
 }
 
+export interface UserRegister{
+  name: String;
+  login: String;
+  password: String;
+}
+
 export interface UserToken{
   token: String;
 }

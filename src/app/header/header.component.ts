@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  validToken = false;
+ validToken = false;
 
 
   constructor(
@@ -32,8 +31,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(["/login"])
   }
 
-    goToSignin() {
-    this.router.navigate(["/signin"])
+  goToRegister() {
+    this.router.navigate(["/register"])
   }
 
   logout(){
