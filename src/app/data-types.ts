@@ -23,3 +23,7 @@ export interface UserRegister{
 export interface UserToken{
   token: String;
 }
+
+export interface VolumeFavorite{
+  volumeId: string;
+}

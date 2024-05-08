@@ -29,7 +29,16 @@
 <section  bg-dark *ngFor="let volume of volumes" class="page-section darkBg pDark">
   <div class="card bg-dark">
     <div class="card-body">
-      <h5 class="card-title text-light">{{volume.title}}</h5>
+
+      <h5 class="card-title text-light">
+        <span *ngIf="validToken">
+          <button (click)="addToFavorite(volume.volumeId)" class="btn">
+            <i class="fa-regular fa-star" style="color: #FFD43B;"></i> &nbsp;&nbsp;
+          </button>
+        </span>
+        {{volume.title}}
+      </h5>
+
       <span class="card-text">{{volume.authors.join(', ')}}</span>
       <p>ISBN10: {{volume.isbn10}} | ISBN13: {{volume.isbn13}} </p>
       <p>{{volume.publishedDate}}</p>

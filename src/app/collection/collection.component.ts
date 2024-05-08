@@ -1,6 +1,7 @@
-import { Volume } from '../data-types';
+import { Volume, VolumeFavorite } from './../data-types';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ApiService } from '../service/api.service';
+import { TokenService } from '../service/token.service';
 
 @Component({
   selector: 'app-collection',
@@ -8,9 +9,12 @@ import { ApiService } from '../service/api.service';
   styleUrls: ['./collection.component.css']
 })
 export class CollectionComponent implements OnInit, OnChanges {
+
+  validToken = false;
   volumesDB: Volume[] = [];
   volumes: Volume[] = [];
   volume: Volume | undefined;
+  userFavorites: Volume[] = [];
   @Input() selectedField: string = "";
   @Input() userInput: string = "";
 
@@ -21,7 +25,10 @@ export class CollectionComponent implements OnInit, OnChanges {
   ]
 
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private tokenService: TokenService
+  ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log("finding by...");
@@ -35,10 +42,29 @@ export class CollectionComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-  this.apiService.getVolumes().subscribe((data)=>{
-    this.volumes = this.volumesDB = data;
-    console.log(this.volumesDB);
-  })}
+    this.apiService.getVolumes().subscribe((data)=>{
+      this.volumes = this.volumesDB = data;
+      console.log(this.volumesDB);
+
+      this.validToken = this.tokenService.isValidToken();
+      // Subscribe for future changes
+      this.tokenService.subscribe$.subscribe(data => {
+        this.validToken = data;
+    });
+
+    console.log("Valid token: " + this.validToken);
+
+    if(this.validToken){
+      this.apiService.getUserFavorites().subscribe((data)=>{
+        this.userFavorites = data;
+        console.log("FAVORITES: " + this.userFavorites);
+        this.userFavorites.forEach(volume => console.log("VOLUME: " + volume.title));
+      });
+    }
+
+    })
+
+  }
 
 
   public findBy(){
@@ -64,7 +90,14 @@ export class CollectionComponent implements OnInit, OnChanges {
       default:
         this.volumes = this.volumesDB;
     }
+  }
 
+  addToFavorite(volumeId: string) {
+    let volumeFavoriteId : VolumeFavorite = {volumeId: volumeId};
+    this.apiService.addFavorite(volumeFavoriteId)
+    .subscribe(res => {
+      console.log("Favorite status: " + res);
+    });
   }
 
 }
