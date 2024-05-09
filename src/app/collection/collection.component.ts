@@ -14,7 +14,7 @@ export class CollectionComponent implements OnInit, OnChanges {
   volumesDB: Volume[] = [];
   volumes: Volume[] = [];
   volume: Volume | undefined;
-  userFavorites: Volume[] = [];
+  userFavorites: String[] = [];
   @Input() selectedField: string = "";
   @Input() userInput: string = "";
 
@@ -31,8 +31,6 @@ export class CollectionComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("finding by...");
-    console.log(this.selectedField);
     switch(this.selectedField){
       case "author":
         this.volumes = this.volumesDB.filter((v) =>
@@ -51,26 +49,22 @@ export class CollectionComponent implements OnInit, OnChanges {
       this.tokenService.subscribe$.subscribe(data => {
         this.validToken = data;
     });
-
-    console.log("Valid token: " + this.validToken);
-
+    //console.log("Valid token: " + this.validToken);
     if(this.validToken){
-      this.apiService.getUserFavorites().subscribe((data)=>{
-        this.userFavorites = data;
-        console.log("FAVORITES: " + this.userFavorites);
-        this.userFavorites.forEach(volume => console.log("VOLUME: " + volume.title));
-      });
+      this.getUsersFavorites();
     }
 
-    })
+  })
 
   }
 
+  getUsersFavorites(){
+    return this.apiService.getUserFavorites().subscribe((data)=>{
+      this.userFavorites = data.map((v) => v.volumeId);
+    });
+  }
 
-  public findBy(){
-    console.log("finding by...");
-    console.log(this.selectedField);
-    console.log(this.userInput);
+  findBy(){
     switch(this.selectedField){
       case "title":
         this.volumes = this.volumesDB.filter((v) => v.title.toLowerCase().includes(this.userInput.toLowerCase()));
@@ -97,7 +91,10 @@ export class CollectionComponent implements OnInit, OnChanges {
     this.apiService.addFavorite(volumeFavoriteId)
     .subscribe(res => {
       console.log("Favorite status: " + res);
+      this.getUsersFavorites();
     });
   }
+
+  removeFavorite(volumeId: string) {}
 
 }
