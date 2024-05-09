@@ -5,15 +5,13 @@
       <ul class=" mb-lg-0 nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li><a href="homepage" class="nav-link px-2 text-secondary">Home</a></li>
         <li><a href="collection" class="nav-link px-2 text-white">Collection</a></li>
-        <li *ngIf="validToken"><a href="#" class="nav-link px-2 text-white">Favorites</a></li>
+        <li *ngIf="validToken"><a href="favorites" class="nav-link px-2 text-white">Favorites</a></li>
         <li><a href="#" class="nav-link px-2 text-white">Contact</a></li>
       </ul>
 
       <div class="col-12 col-lg-auto mb-3  me-lg-3 text-center" role="img">
         <img src="assets/logo-lumus-library.png"  width=30% />
       </div>
-    </div>
-
 
     <div *ngIf="validToken">
       <div class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0 ">
@@ -26,6 +24,7 @@
           <button (click)="goToLogin()" type="button" class="btn btn-outline-light me-2">Login</button>
         <button  (click)="goToRegister()" type="button" class="btn btn-warning">Register</button>
       </div>
+    </div>
     </div>
   </div>
 

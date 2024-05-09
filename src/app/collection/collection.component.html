@@ -1,8 +1,7 @@
 <div class="div-collection"></div>
 <section class="hero-section">
-
-  <div class="div-form"></div>
-      <div class="container-xl">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
         <form>
           <div>
             <select name="selectedField" [(ngModel)]="selectedField" class="form-select form-select-m mb-3">
@@ -10,7 +9,7 @@
               <option *ngFor="let o of options" [ngValue]="o.value">{{o.name}}</option>
             </select>
           </div>
-          <div class="mb-3">
+          <div class="mb-1">
             <input type="text" name="userInput" class="form-control" [(ngModel)]="userInput" (ngModelChange)="findBy()">
           </div>
             <div class="text-end">
@@ -18,40 +17,48 @@
             </div>
         </form>
       </div>
-    <div class="div-form"></div>
-      <div class="container">
-        <h1 class="responsive-headline text-center">Lumus Collection</h1>
-      </div>
+  </div>
+  <div class="div-form"></div>
 </section>
 
 <div class="div-collection"></div>
 
-<section  bg-dark *ngFor="let volume of volumes" class="page-section darkBg pDark">
-  <div class="card bg-dark">
-    <div class="card-body">
-
-      <h5 class="card-title text-light">
-        <span *ngIf="validToken">
-
-          <span *ngIf="userFavorites.includes(volume.volumeId)">
-            <button (click)="removeFavorite(volume.volumeId)" class="btn">
-              <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-            </button>
-          </span>
-
-          <span *ngIf="!(userFavorites.includes(volume.volumeId))">
-            <button (click)="addToFavorite(volume.volumeId)" class="btn">
-              <i class="fa-regular fa-star" style="color: #FFD43B;"></i> &nbsp;&nbsp;
-            </button>
-          </span>
-        </span>
-        {{volume.title}}
-      </h5>
-
-      <span class="card-text">{{volume.authors.join(', ')}}</span>
-      <p>ISBN10: {{volume.isbn10}} | ISBN13: {{volume.isbn13}} </p>
-      <p>{{volume.publishedDate}}</p>
+<section  bg-dark class="page-section darkBg pDark">
+  <div class="container mt-3">
+    <h1 class="responsive-headline text-center text-light">Lumus Collection</h1>
+  </div>
+  <div class="container mt-3">
+    <div class="row justify-content-center">
+      <div class="col-md-50">
+        <div class="card-deck">
+          <section *ngFor="let volume of volumes" class="page-section darkBg pDark">
+            <div class="card bg-dark">
+              <div class="card-body">
+                <h5 class="card-title text-light">
+                  <span *ngIf="validToken">
+                    <span *ngIf="userFavorites.includes(volume.volumeId)">
+                      <button (click)="removeFavorite(volume.volumeId)" class="btn">
+                        <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                      </button>
+                    </span>
+                    <span *ngIf="!(userFavorites.includes(volume.volumeId))">
+                      <button (click)="addToFavorite(volume.volumeId)" class="btn">
+                        <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+                      </button>
+                    </span>
+                  </span>
+                  {{volume.title}}
+                </h5>
+                <span class="card-text">{{volume.authors.join(', ')}}</span>
+                <p>ISBN10: {{volume.isbn10}} | ISBN13: {{volume.isbn13}} </p>
+                <p>{{volume.publishedDate}}</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
   </div>
+
 </section>
 
