@@ -44,24 +44,6 @@ export class ApiService {
   }
 
 
-  addFavorite(volumeFavorite: VolumeFavorite): Observable<number> {
-    console.log("Service addFavorite called");
-    
-    return this.httpClient.post('http://localhost:8080/volumes/favorite', volumeFavorite, {headers: new HttpHeaders('Authorization: Bearer ' + this.tokenService.getToken()), observe: 'response'})
-    .pipe(
-      map(response => {
-        console.log("Response: " + response);
-        console.log("Status: " + response.status);
-        return response.status;
-      }),
-
-      catchError((error: HttpErrorResponse) => {
-        console.log("Error status: ", error.status);
-        return of(error.status);
-      }),
-    );
-  }
-
   register(user: UserRegister): Observable<number> {
     console.log("Service register called");
     // let status : number = 0;
@@ -82,11 +64,27 @@ export class ApiService {
   }
 
 
-  /*addFavorite(volumeId: VolumeFavorite): Observable<number>{
-    console.log("Service favorite called with VolumeID = " + volumeId);
-    let header = new HttpHeaders('Authorization: Bearer ' + this.tokenService.getToken());
 
-    return this.httpClient.post('http://localhost:8080/volumes/favorite', volumeId, {headers: header, observe: 'response'})
+  addFavorite(volumeFavorite: VolumeFavorite): Observable<number> {
+    console.log("Service addFavorite called");
+
+    return this.httpClient.post('http://localhost:8080/volumes/favorite', volumeFavorite, {headers: new HttpHeaders('Authorization: Bearer ' + this.tokenService.getToken()), observe: 'response'})
+    .pipe(
+      map(response => {
+        return response.status;
+      }),
+
+      catchError((error: HttpErrorResponse) => {
+        console.log("Error status: ", error.status);
+        return of(error.status);
+      }),
+    );
+  }
+
+  removeFavorite(volumeFavorite: VolumeFavorite): Observable<number> {
+    console.log("Service removeFavorite called");
+
+    return this.httpClient.delete('http://localhost:8080/volumes/favorite', {headers: new HttpHeaders('Authorization: Bearer ' + this.tokenService.getToken()), body: volumeFavorite, observe: 'response'})
     .pipe(
       map(response => {
         console.log("Response: " + response);
@@ -99,7 +97,7 @@ export class ApiService {
         return of(error.status);
       }),
     );
-  }*/
+  }
 
 
 }

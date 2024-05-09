@@ -95,6 +95,12 @@ export class CollectionComponent implements OnInit, OnChanges {
     });
   }
 
-  removeFavorite(volumeId: string) {}
-
+  removeFavorite(volumeId: string) {
+    let volumeFavoriteId : VolumeFavorite = {volumeId: volumeId};
+    this.apiService.removeFavorite(volumeFavoriteId)
+    .subscribe(res =>{
+      console.log("Remove favorite status: " + res);
+      this.getUsersFavorites();
+    })
+  }
 }
