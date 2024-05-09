@@ -40,23 +40,24 @@ export class CollectionComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.apiService.getVolumes().subscribe((data)=>{
-      this.volumes = this.volumesDB = data;
-      console.log(this.volumesDB);
-
-      this.validToken = this.tokenService.isValidToken();
-      // Subscribe for future changes
-      this.tokenService.subscribe$.subscribe(data => {
-        this.validToken = data;
-    });
-    //console.log("Valid token: " + this.validToken);
-    if(this.validToken){
-      this.getUsersFavorites();
-    }
-
-  })
-
+    this.loadVolumes();
   }
+
+loadVolumes(){
+  this.apiService.getVolumes().subscribe((data)=>{
+    this.volumes = this.volumesDB = data;
+    console.log(this.volumesDB);
+    this.validToken = this.tokenService.isValidToken();
+    // Subscribe for future changes
+    this.tokenService.subscribe$.subscribe(data => {
+      this.validToken = data;
+  });
+
+  if(this.validToken){
+    this.getUsersFavorites();
+  }
+})
+}
 
   getUsersFavorites(){
     return this.apiService.getUserFavorites().subscribe((data)=>{
@@ -74,12 +75,8 @@ export class CollectionComponent implements OnInit, OnChanges {
                 v.authors.some((a) => a.toLowerCase().includes(this.userInput.toLowerCase())));
           break;
       case "isbn":
-        if(this.userInput.length == 10 || this.userInput.length == 13){
         this.volumes = this.volumesDB.filter((v) =>
-              v.isbn10 == this.userInput || v.isbn13 == this.userInput);
-        } else{
-          this.volumes = this.volumesDB;
-        }
+              v.isbn10.startsWith(this.userInput) || v.isbn13.startsWith(this.userInput));
         break;
       default:
         this.volumes = this.volumesDB;
