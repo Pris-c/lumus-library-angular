@@ -1,0 +1,16 @@
+<section *ngIf="this.showFavorites" class="bg-dark text-light p-4 mb-4 rounded">
+  <h2 class="text-center mb-4">My Favorite Books</h2>
+  <ul class="list-group">
+    <li *ngFor="let favorite of userFavorites" class="list-group-item bg-dark text-light">
+      <h4 class="mb-1">{{favorite.title}}</h4>
+      <p class="mb-1">{{favorite.authors.join(', ')}}</p>
+      <p class="mb-1">ISBN10: {{favorite.isbn10}} | ISBN13: {{favorite.isbn13}}</p>
+      <p class="mb-0">Published Date: {{favorite.publishedDate}}</p>
+    </li>
+  </ul>
+</section>
+
+<section *ngIf="!this.showFavorites" class="bg-danger text-light p-4 mb-4 rounded">
+  <h2 class="text-center">Unauthorized Access</h2>
+  <p class="text-center">You are not authorized to view this page</p>
+</section>

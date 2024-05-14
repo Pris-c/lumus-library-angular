@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,18 @@ export class TokenService {
   observer = new Subject<boolean>();
   public subscribe$ = this.observer.asObservable();
 
+  role = new Subject<boolean>();
+  public role$ = this.role.asObservable();
+
   emitData(data: boolean){
     console.log("emitData");
     this.observer.next(data);
+  }
+
+
+  emitRoleData(data: boolean){
+    console.log("emitRoleData");
+    this.role.next(data);
   }
 
   constructor() { }
@@ -30,6 +40,16 @@ export class TokenService {
 
   isValidToken(){
     return this.getToken() != null;
+  }
+
+  checkForRoleUser(): any {
+    console.log("checking user role")
+    try {
+      const token = this.getToken() as string;
+      return jwt_decode.jwtDecode(token).sub?.endsWith("USER");
+    } catch(Error) {
+      return null;
+    }
   }
 
 }

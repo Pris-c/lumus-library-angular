@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
  validToken = false;
+ showFavorites = false;
 
 
   constructor(
@@ -20,10 +21,15 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.validToken = this.tokenService.isValidToken();
+    this.showFavorites = this.tokenService.checkForRoleUser();
 
     // Subscribe for future changes
     this.tokenService.subscribe$.subscribe(data => {
       this.validToken = data;
+    });
+
+    this.tokenService.role$.subscribe(data => {
+      this.showFavorites = data;
     });
   }
 
@@ -36,10 +42,9 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(){
-    console.log("Called logout")
     this.apiService.logout();
     this.validToken = false;
+    this.showFavorites = false;
     this.router.navigate([""]);
   }
-
 }

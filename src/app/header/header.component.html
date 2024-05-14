@@ -5,7 +5,7 @@
       <ul class=" mb-lg-0 nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li><a href="homepage" class="nav-link px-2 text-secondary">Home</a></li>
         <li><a href="collection" class="nav-link px-2 text-white">Collection</a></li>
-        <li *ngIf="validToken"><a href="favorites" class="nav-link px-2 text-white">Favorites</a></li>
+        <li *ngIf="showFavorites"><a href="favorites" class="nav-link px-2 text-white">Favorites</a></li>
         <li><a href="#" class="nav-link px-2 text-white">Contact</a></li>
       </ul>
 
@@ -27,6 +27,5 @@
     </div>
     </div>
   </div>
-
 </nav>
 

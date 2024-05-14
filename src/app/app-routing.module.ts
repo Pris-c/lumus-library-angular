@@ -7,6 +7,8 @@ const routes: Routes = [
   { path: 'collection', loadChildren: () => import('./collection/collection.module').then(m => m.CollectionModule) },
   { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
   { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule) },
+  { path: 'favorites', loadChildren: () => import('./favorites/favorites.module').then(m => m.FavoritesModule) },
+  { path: 'error-page', loadChildren: () => import('./error-page/error-page.module').then(m => m.ErrorPageModule) },
 
 ];
 
