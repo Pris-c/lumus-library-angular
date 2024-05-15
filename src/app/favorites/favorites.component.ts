@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { TokenService } from './../service/token.service';
-import { Volume } from '../data-types';
+import { Volume, VolumeFavorite } from '../data-types';
 import { ApiService } from './../service/api.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -34,4 +34,16 @@ export class FavoritesComponent implements OnInit {
       this.userFavorites = data;
     });
   }
+
+
+  removeFavorite(volumeId: string) {
+    let volumeFavoriteId : VolumeFavorite = {volumeId: volumeId};
+    this.apiService.removeFavorite(volumeFavoriteId)
+    .subscribe(res =>{
+      console.log("Remove favorite status: " + res);
+      this.getUsersFavorites();
+    })
+  }
+
+
 }

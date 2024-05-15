@@ -1,0 +1,56 @@
+.hero-section{
+  background:url('src/assets/britgh.webp') top left repeat-x;
+  background-attachment: relative;
+	background-position: center center;
+  padding:15px 0;
+  font-size: 40px;
+  color:black;
+	font-size: 50px;
+	font-weight: 400;
+	text-align: center;
+	letter-spacing: 3px;
+}
+.div-collection{
+  padding: 2px 0;
+  font-size: 2em;
+}
+.div-form{
+  padding: 1px 0;
+  font-size: 2em;
+}
+.page-section {
+  width: 100%;
+  height: auto;
+  padding: 15px 0;
+}
+.page-section h2 {
+  color: #f49500;
+  font-size: 1.2em;
+}
+.page-section span {
+  color: #f49500;
+  font-size: 1em;
+}
+.page-section p {
+  font-size: 1em;
+  line-height: 1.6em;
+  margin: 0 0 0px;
+}
+.page-section ul li{
+  color: #6D6D6D;
+}
+.darkBg {
+  background: #000;
+}
+.pDark p {
+  color: #6D6D6D;
+}
+.pDark h3 {
+  color: #BEBEBE;
+}
+.heading {
+  padding: 3px 10px;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  display: block;
+}
