@@ -13,15 +13,22 @@ export class TokenService {
   role = new Subject<boolean>();
   public role$ = this.role.asObservable();
 
+  admin = new Subject<boolean>();
+  public admin$ = this.admin.asObservable();
+
   emitData(data: boolean){
     console.log("emitData");
     this.observer.next(data);
   }
 
-
   emitRoleData(data: boolean){
     console.log("emitRoleData");
     this.role.next(data);
+  }
+
+  emitAdminInfo(data: boolean){
+    console.log("emitAdminData");
+    this.admin.next(data);
   }
 
   constructor() { }
@@ -46,9 +53,21 @@ export class TokenService {
     console.log("checking user role")
     try {
       const token = this.getToken() as string;
+      console.log("token sub: " + jwt_decode.jwtDecode(token).sub);
       return jwt_decode.jwtDecode(token).sub?.endsWith("USER");
     } catch(Error) {
-      return null;
+      return false;
+    }
+  }
+
+  checkForRoleAdmin(): any {
+    console.log("checking admin role")
+    try {
+      const token = this.getToken() as string;
+      console.log("token sub: " + jwt_decode.jwtDecode(token).sub);
+      return jwt_decode.jwtDecode(token).sub?.endsWith("ADMIN");
+    } catch(Error) {
+      return false;
     }
   }
 

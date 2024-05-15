@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
       else{
         this.tokenService.saveToken(JSON.stringify(data.token));
         this.tokenService.emitRoleData(this.tokenService.checkForRoleUser());
+        this.tokenService.emitAdminInfo(this.tokenService.checkForRoleAdmin());
         this.tokenService.emitData(true);
         this.router.navigate([""]);
       }

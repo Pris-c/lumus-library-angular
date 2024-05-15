@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { TokenService } from './../service/token.service';
 import { Volume } from '../data-types';
 import { ApiService } from './../service/api.service';
@@ -15,13 +16,16 @@ export class FavoritesComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
       this.showFavorites = this.tokenService.checkForRoleUser();
       if(this.showFavorites){
         this.getUsersFavorites();
+      } else {
+        this.router.navigate(["/error-page"]);
       }
   }
 

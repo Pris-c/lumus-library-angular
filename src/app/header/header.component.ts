@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
  validToken = false;
  showFavorites = false;
+ admin = false;
 
 
   constructor(
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.validToken = this.tokenService.isValidToken();
     this.showFavorites = this.tokenService.checkForRoleUser();
+    this.admin = this.tokenService.checkForRoleAdmin();
 
     // Subscribe for future changes
     this.tokenService.subscribe$.subscribe(data => {
@@ -30,6 +32,10 @@ export class HeaderComponent implements OnInit {
 
     this.tokenService.role$.subscribe(data => {
       this.showFavorites = data;
+    });
+
+    this.tokenService.admin$.subscribe(data => {
+      this.admin = data;
     });
   }
 
@@ -45,6 +51,7 @@ export class HeaderComponent implements OnInit {
     this.apiService.logout();
     this.validToken = false;
     this.showFavorites = false;
+    this.admin = false;
     this.router.navigate([""]);
   }
 }
