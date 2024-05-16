@@ -10,6 +10,7 @@ import { TokenService } from '../service/token.service';
 })
 export class CollectionComponent implements OnInit, OnChanges {
 
+  roleUser = false;
   validToken = false;
   volumesDB: Volume[] = [];
   volumes: Volume[] = [];
@@ -17,6 +18,7 @@ export class CollectionComponent implements OnInit, OnChanges {
   userFavorites: String[] = [];
   @Input() selectedField: string = "";
   @Input() userInput: string = "";
+
 
   options = [
     {name: "Title", value: "title"},
@@ -40,23 +42,28 @@ export class CollectionComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.roleUser = this.tokenService.checkForRoleUser();
     this.loadVolumes();
+
+    this.tokenService.role$.subscribe(data => {
+      this.roleUser = data;
+    });
   }
 
-loadVolumes(){
-  this.apiService.getVolumes().subscribe((data)=>{
-    this.volumes = this.volumesDB = data;
-    this.validToken = this.tokenService.isValidToken();
-    // Subscribe for future changes
-    this.tokenService.subscribe$.subscribe(data => {
-      this.validToken = data;
-  });
+  loadVolumes(){
+    this.apiService.getVolumes().subscribe((data)=>{
+      this.volumes = this.volumesDB = data;
+      this.validToken = this.tokenService.isValidToken();
+      // Subscribe for future changes
+      this.tokenService.subscribe$.subscribe(data => {
+        this.validToken = data;
+    });
 
-  if(this.validToken){
-    this.getUsersFavorites();
+    if(this.validToken){
+      this.getUsersFavorites();
+    }
+  })
   }
-})
-}
 
   getUsersFavorites(){
     return this.apiService.getUserFavorites().subscribe((data)=>{
@@ -83,12 +90,14 @@ loadVolumes(){
   }
 
   addToFavorite(volumeId: string) {
-    let volumeFavoriteId : VolumeFavorite = {volumeId: volumeId};
-    this.apiService.addFavorite(volumeFavoriteId)
-    .subscribe(res => {
-      console.log("Favorite status: " + res);
-      this.getUsersFavorites();
-    });
+    if(this.roleUser){
+      let volumeFavoriteId : VolumeFavorite = {volumeId: volumeId};
+      this.apiService.addFavorite(volumeFavoriteId)
+      .subscribe(res => {
+        console.log("Favorite status: " + res);
+        this.getUsersFavorites();
+      });
+    }
   }
 
   removeFavorite(volumeId: string) {

@@ -35,7 +35,7 @@
             <div class="card bg-dark">
               <div class="card-body">
                 <h5 class="card-title text-light">
-                  <span *ngIf="validToken">
+                  <span *ngIf="roleUser">
                     <span *ngIf="userFavorites.includes(volume.volumeId)">
                       <button (click)="removeFavorite(volume.volumeId)" class="btn">
                         <i class="fa-solid fa-star" style="color: #FFD43B;"></i>

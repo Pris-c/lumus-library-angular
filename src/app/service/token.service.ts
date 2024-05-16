@@ -10,8 +10,8 @@ export class TokenService {
   observer = new Subject<boolean>();
   public subscribe$ = this.observer.asObservable();
 
-  role = new Subject<boolean>();
-  public role$ = this.role.asObservable();
+  user = new Subject<boolean>();
+  public role$ = this.user.asObservable();
 
   admin = new Subject<boolean>();
   public admin$ = this.admin.asObservable();
@@ -23,7 +23,7 @@ export class TokenService {
 
   emitRoleData(data: boolean){
     console.log("emitRoleData");
-    this.role.next(data);
+    this.user.next(data);
   }
 
   emitAdminInfo(data: boolean){

@@ -1,1 +1,37 @@
-<p>admin works!</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header text-light bg-dark">Register new book</div>
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="callSave()">
+            <div class="form-group mb-3">
+              <label for="login">ISBN</label>
+              <input id="isbn" formControlName="isbn" type="text" class="form-control" placeholder="Enter ISBN value">
+            </div>
+            <button type="submit" class="btn btn-primary btn-warning">Save Book</button>
+          </form>
+          <div class="row-fluid span12 text-center row-fluid text-danger">
+
+            <div  *ngIf="failSave">Something went wrong!</div>
+            <div  *ngIf="failSave">Please check if a valid ISBN was informed</div>
+
+            <span  *ngIf="invalidForm">Fild missing!</span>
+            <span  *ngIf="errorMessage">{{ errorMessage }}</span>
+
+            <div *ngIf="newVolume">
+              <h1>Volume succesful saved!</h1>
+              <p>{{ newVolume.volumeId }}</p>
+              <p>{{ newVolume.title }}</p>
+              <p>{{ newVolume.authors.join(', ')}}</p>
+              <p>ISBN10: {{newVolume.isbn10}} | ISBN13: {{newVolume.isbn13}} </p>
+              <p>{{newVolume.publishedDate}}</p>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

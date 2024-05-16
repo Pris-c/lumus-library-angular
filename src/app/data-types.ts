@@ -27,3 +27,7 @@ export interface UserToken{
 export interface VolumeFavorite{
   volumeId: string;
 }
+
+export interface SaveRequest{
+  isbn: string;
+}
