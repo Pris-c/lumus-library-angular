@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'favorites', loadChildren: () => import('./favorites/favorites.module').then(m => m.FavoritesModule) },
   { path: 'error-page', loadChildren: () => import('./error-page/error-page.module').then(m => m.ErrorPageModule) },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { path: 'top-books', loadChildren: () => import('./top-books/top-books.module').then(m => m.TopBooksModule) },
 
 ];
 

@@ -1,0 +1,37 @@
+<div class="div-collection"></div>
+<section class="hero-section">
+    <div class="row justify-content-center">
+      <div class="container mt-3">
+        <h1 class="text-center">
+          TOP 5 LUMUS
+          <i class="fa-solid fa-trophy"></i>
+        </h1>
+      </div>
+  </div>
+  <div class="div-form"></div>
+</section>
+
+<section class="page-section bg-light text-dark">
+  <div class="container mt-3">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="card-columns">
+          <section *ngFor="let favorite of favorites; let i = index" class="card bg-light text-dark h-100">
+            <div class="d-flex h-100">
+              <div class="d-flex align-items-center justify-content-center text-white mr-3" style="width: 40px; font-size: 1.2em; font-weight: bold; background-color: orange; height: 100%;">
+                {{ i + 1 }}
+              </div>
+              <div class="card-body flex-grow-1">
+                <h5 class="card-title">{{ favorite.title }}</h5>
+                <span class="card-text">{{ favorite.authors.join(', ') }}</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+

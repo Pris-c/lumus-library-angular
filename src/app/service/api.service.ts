@@ -25,7 +25,11 @@ export class ApiService {
               'Authorization: Bearer ' + this.tokenService.getToken(),
            )});
   }
-  
+
+  public getTopFavorites(){
+    return this.httpClient.get<Volume[]>(`http://localhost:8080/volumes/top-favorites`);
+  }
+
   public findById(id: string){
     return this.httpClient.get<Volume>(`http://localhost:8080/volumes/${id}`, {headers: new HttpHeaders('Authorization: Bearer ' + this.tokenService.getToken())});
   }
@@ -42,7 +46,6 @@ export class ApiService {
     return this.httpClient.get<Volume>(`http://localhost:8080/volumes/isbn/${isbn}`, {headers: new HttpHeaders('Authorization: Bearer ' + this.tokenService.getToken())});
   }
 
-
   public login(user: LibraryUser): Observable<UserToken | null>{
     return this.httpClient.post<UserToken>(this.uriLogin, user).pipe(
       map(response => {
@@ -54,7 +57,6 @@ export class ApiService {
       })
     );
   }
-
 
   logout() {
     this.tokenService.deleteToken();
