@@ -52,7 +52,11 @@ export class CollectionComponent implements OnInit, OnChanges {
 
   loadVolumes(){
     this.apiService.getVolumes().subscribe((data)=>{
+
       this.volumes = this.volumesDB = data;
+      this.volumes.sort((a,b) => a.title.localeCompare(b.title));
+
+
       this.validToken = this.tokenService.isValidToken();
       // Subscribe for future changes
       this.tokenService.subscribe$.subscribe(data => {

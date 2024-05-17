@@ -18,20 +18,80 @@
 
             <span  *ngIf="invalidForm">Fild missing!</span>
             <span  *ngIf="errorMessage">{{ errorMessage }}</span>
-
-            <div *ngIf="newVolume">
-              <h1>Volume succesful saved!</h1>
-              <p>{{ newVolume.volumeId }}</p>
-              <p>{{ newVolume.title }}</p>
-              <p>{{ newVolume.authors.join(', ')}}</p>
-              <p>ISBN10: {{newVolume.isbn10}} | ISBN13: {{newVolume.isbn13}} </p>
-              <p>{{newVolume.publishedDate}}</p>
-            </div>
-
-
           </div>
-        </div>
+
+            <div *ngIf="newVolume" class="card-body row-fluid span12">
+              <h5 class="card-title text-center">
+                <p> New volume saved succefully !! </p>
+              </h5>
+                <p>ID: {{ newVolume.volumeId }}</p>
+                <p>Title: {{ newVolume.title }}</p>
+                <p>Authors: {{ newVolume.authors.join(', ')}}</p>
+                <p>ISBN10: {{newVolume.isbn10}} | ISBN13: {{newVolume.isbn13}} </p>
+                <p>Published Date: {{newVolume.publishedDate}}</p>
+            </div>
       </div>
+
+      <div class="card-header text-light bg-dark">Delete a book</div>
+      <div class="card-body">
+        <form (ngSubmit)="findBy()">
+          <div>
+            <select name="selectedField" [(ngModel)]="selectedField" required class="form-select form-select-m mb-3">
+              <option value="" disabled selected hidden>Choose an option</option>
+              <option *ngFor="let o of options" [ngValue]="o.value">{{o.name}}</option>
+            </select>
+          </div>
+          <div class="mb-1">
+            <input type="text" name="userInput" class="form-control" required [(ngModel)]="userInput">
+          </div>
+          <button type="submit" class="btn btn-primary btn-warning">Find</button>
+        </form>
+        <div class="row-fluid span12 text-center row-fluid text-danger">
+          <span *ngIf="invalidFindForm">Fild missing!</span>
+        </div>
+
+        <section class="page-section bg-light text-dark">
+          <div class="container mt-3">
+            <div class="row justify-content-center">
+              <div class="col-md-12">
+                <div class="card-columns">
+
+                  <section *ngIf="volume" class="card bg-light text-dark">
+                    <div class="card-body d-flex justify-content-between">
+                      <div class="flex-grow-1"> <!-- Wrap card content with flex-grow-1 -->
+                        <h5 class="card-title">
+                          Title: {{volume.title}}
+                        </h5>
+                        <div>ID: {{volume.volumeId}}</div>
+                        <div class="card-text">Authors: {{volume.authors.join(', ')}}</div>
+                        <div>ISBN10: {{volume.isbn10}} | ISBN13: {{volume.isbn13}} </div>
+                        <div>Published Date: {{volume.publishedDate}}</div>
+                      </div>
+                      <button (click)="delete(volume)" class="btn btn-danger">Delete</button>
+                    </div>
+                  </section>
+                  <section *ngFor="let volume of volumes" class="card bg-light text-dark">
+                    <div class="card-body d-flex justify-content-between">
+                      <div class="flex-grow-1">
+                        <h5 class="card-title">
+                          Title: {{volume.title}}
+                        </h5>
+                        <div>ID: {{volume.volumeId}}</div>
+                        <div class="card-text">Authors: {{volume.authors.join(', ')}}</div>
+                        <div>ISBN10: {{volume.isbn10}} | ISBN13: {{volume.isbn13}} </div>
+                        <div>Published Date: {{volume.publishedDate}}</div>
+                      </div>
+                      <button (click)="delete(volume)" class="btn btn-danger">Delete</button>
+                    </div>
+                  </section>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+    </div>
     </div>
   </div>
 </div>

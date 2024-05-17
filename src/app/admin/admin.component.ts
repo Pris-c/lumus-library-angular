@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { TokenService } from '../service/token.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,9 +14,22 @@ export class AdminComponent implements OnInit {
 
   admin = false;
   invalidForm = false;
+  invalidFindForm = false;
   failSave = false;
   newVolume: Volume | undefined;
   errorMessage: string | undefined;
+  volumes: Volume[] = [];
+  volume: Volume | undefined;
+  @Input() selectedField: string = "";
+  @Input() userInput: string = "";
+
+
+  options = [
+    {name: "Id", value: "id"},
+    {name: "Title", value: "title"},
+    {name: "Author", value:"author"},
+    {name: "ISBN", value:"isbn"},
+  ]
 
 
   constructor(
@@ -37,7 +50,6 @@ export class AdminComponent implements OnInit {
   form: FormGroup = this.fb.group({
     isbn: ['', Validators.required],
   });
-
 
   callSave(){
     this.newVolume = undefined;
@@ -63,16 +75,52 @@ export class AdminComponent implements OnInit {
         }
       },
       (error) => {
-        if (error.detais != null){
+        try{
           this.errorMessage = "ERROR: " + error.details;
-        } else{
+        }
+        catch(error){
           this.errorMessage = "ERROR: Error to save new volume"
         }
+      })
+    }
+
+    findBy(){
+      this.volume = undefined;
+      this.volumes = []
+      this.invalidFindForm = false;
+      console.log(this.invalidFindForm);
+
+      if (!this.selectedField || !this.userInput) {
+        this.invalidFindForm = true;
+      } else {
+        switch(this.selectedField){
+          case "id":
+            this.apiService.findById(this.userInput).subscribe(response =>{
+              this.volume = response;
+            });
+            break;
+          case "title":
+            this.apiService.findByTitle(this.userInput.toLowerCase()).subscribe(respose =>{
+              this.volumes = respose;
+            })
+            break;
+          case "author":
+            this.apiService.findByAuthor(this.userInput.toLowerCase()).subscribe(respose =>{
+              this.volumes = respose;
+            })
+            break;
+          case "isbn":
+            this.apiService.findByIsbn(this.userInput.toLowerCase()).subscribe(respose =>{
+              this.volume = respose;
+            })
+            break;
+        }
       }
-  )
-  }
+    }
 
-
-
-
+    delete(volume: Volume){
+      console.log("delete started")
+      this.apiService.delete(volume.volumeId).subscribe();
+      console.log("delete finished")
+    }
 }

@@ -25,6 +25,22 @@ export class ApiService {
               'Authorization: Bearer ' + this.tokenService.getToken(),
            )});
   }
+  
+  public findById(id: string){
+    return this.httpClient.get<Volume>(`http://localhost:8080/volumes/${id}`, {headers: new HttpHeaders('Authorization: Bearer ' + this.tokenService.getToken())});
+  }
+
+  public findByTitle(title: string){
+    return this.httpClient.get<Volume[]>(`http://localhost:8080/volumes/title/${title}`, {headers: new HttpHeaders('Authorization: Bearer ' + this.tokenService.getToken())});
+  }
+
+  public findByAuthor(author: string){
+    return this.httpClient.get<Volume[]>(`http://localhost:8080/volumes/author/${author}`, {headers: new HttpHeaders('Authorization: Bearer ' + this.tokenService.getToken())});
+  }
+
+  public findByIsbn(isbn: string){
+    return this.httpClient.get<Volume>(`http://localhost:8080/volumes/isbn/${isbn}`, {headers: new HttpHeaders('Authorization: Bearer ' + this.tokenService.getToken())});
+  }
 
 
   public login(user: LibraryUser): Observable<UserToken | null>{
@@ -39,10 +55,10 @@ export class ApiService {
     );
   }
 
+
   logout() {
     this.tokenService.deleteToken();
   }
-
 
   register(user: UserRegister): Observable<number> {
     return this.httpClient.post('http://localhost:8080/auth/register', user, {observe: 'response'})
@@ -100,5 +116,18 @@ export class ApiService {
     );
   }
 
+  delete(volumeId: string): Observable<number> {
+    return this.httpClient.delete(`http://localhost:8080/volumes/${volumeId}`, {headers: new HttpHeaders('Authorization: Bearer ' + this.tokenService.getToken()), observe: 'response'})
+    .pipe(
+      map(response => {
+        return response.status;
+      }),
+
+      catchError((error: HttpErrorResponse) => {
+        console.log("Delete error: ", error.status);
+        return of(error.status);
+      }),
+    );
+  }
 
 }
