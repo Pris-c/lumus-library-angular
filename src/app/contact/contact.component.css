@@ -1,0 +1,97 @@
+.profile-pic {
+  width: 300px;
+  height:300px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 10px solid #ddd;
+}
+
+.darkBg {
+  background: #000;
+  border-bottom: 50xp;
+
+}
+
+body {
+  background-color: #121212;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+.darkBg {
+  background-color: #121212;
+}
+
+.card {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+a {
+  color: #fbfdf7;
+}
+
+
+
+#headerwrap {
+	background: url(src/assets/header_bg.jpg) no-repeat center top;
+	margin-top: -50px;
+	padding-top: 120px;
+	text-align: center;
+	background-attachment: relative;
+	background-position: center center;
+	min-height: 850px;
+	width: 100%;
+	-webkit-background-size: 100%;
+	-moz-background-size: 100%;
+	-o-background-size: 100%;
+	background-size: 100%;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	padding-bottom: 100px;
+}
+#headerwrap h1 {
+	color: #ffffff;
+	font-size: 50px;
+	font-weight: 400;
+	text-align: center;
+	letter-spacing: 3px;
+}
+#headerwrap p {
+	color: #fff;
+	font-size: 22px;
+	font-weight: 300;
+	text-align: center;
+	letter-spacing: 1px;
+}
+#headerwrap .btn {
+	font-weight: 500;
+	font-size: 20px;
+	margin: 50px 0;
+	background-color: #e89a2f;
+	color: #fff;
+	border-radius: 0;
+	color: #000;
+}
+#headerwrap .btn:hover, #headerwrap .btn:focus {
+	background-color:#fff;
+	color:#000;
+	outline: 0px;
+	border-radius: 0px;
+}
+.div-pattern2{
+  background:url('src/assets/div-pattern2.png') top left repeat-x;
+  height:30px;
+  width:100%;
+  display:block;
+}
+
+#headerwrap .icon {
+	color: #ffffff;
+	margin-top: 115px;
+	padding-bottom: 30px;
+	letter-spacing: 8px;
+	font-size: 100px;
+	font-weight: bold;
+}
