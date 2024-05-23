@@ -19,9 +19,9 @@ export class HomepageComponent implements OnInit {
 
 
   getTopFavorites(){
+    console.log("Get Top Favorites")
     this.apiService.getTopFavorites().subscribe((data) =>{
       this.topVolumes = data;
-      this.topVolumes.forEach(v => console.log(v));
     })
   }
 

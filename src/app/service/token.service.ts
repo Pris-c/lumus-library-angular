@@ -17,17 +17,14 @@ export class TokenService {
   public admin$ = this.admin.asObservable();
 
   emitData(data: boolean){
-    console.log("emitData");
     this.observer.next(data);
   }
 
   emitRoleData(data: boolean){
-    console.log("emitRoleData");
     this.user.next(data);
   }
 
   emitAdminInfo(data: boolean){
-    console.log("emitAdminData");
     this.admin.next(data);
   }
 
@@ -50,10 +47,9 @@ export class TokenService {
   }
 
   checkForRoleUser(): any {
-    console.log("checking user role")
+    console.log("checking role")
     try {
       const token = this.getToken() as string;
-      console.log("token sub: " + jwt_decode.jwtDecode(token).sub);
       return jwt_decode.jwtDecode(token).sub?.endsWith("USER");
     } catch(Error) {
       return false;
@@ -61,10 +57,9 @@ export class TokenService {
   }
 
   checkForRoleAdmin(): any {
-    console.log("checking admin role")
+    console.log("checking role")
     try {
       const token = this.getToken() as string;
-      console.log("token sub: " + jwt_decode.jwtDecode(token).sub);
       return jwt_decode.jwtDecode(token).sub?.endsWith("ADMIN");
     } catch(Error) {
       return false;

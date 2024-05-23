@@ -13,20 +13,22 @@
 
 <section class="page-section bg-light text-dark">
 
+
   <div class="container mt-3">
     <div class="row justify-content-center">
       <div class="col-md-12">
         <div class="card-columns">
+          <h5 *ngIf="emptyFavorites" class="text-center text-danger">
+            You haven't added any favorite yet!
+          </h5>
+
           <section *ngFor="let favorite of userFavorites" class="card bg-light text-dark">
             <div class="card-body">
               <h5 class="card-title">
-
-
-              <button (click)="removeFavorite(favorite.volumeId)" class="btn btn-light">
-                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-              </button>
-
-              {{favorite.title}}
+                <button (click)="removeFavorite(favorite.volumeId)" class="btn btn-light">
+                  <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                </button>
+                {{favorite.title}}
               </h5>
 
               <span class="card-text">{{favorite.authors.join(', ')}}</span>

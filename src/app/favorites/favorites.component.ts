@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 export class FavoritesComponent implements OnInit {
 
   showFavorites: boolean = true;
+  emptyFavorites: boolean = false;
   userFavorites: Volume[] = [];
 
   constructor(
@@ -24,14 +25,17 @@ export class FavoritesComponent implements OnInit {
       this.showFavorites = this.tokenService.checkForRoleUser();
       if(this.showFavorites){
         this.getUsersFavorites();
+
       } else {
         this.router.navigate(["/error-page"]);
       }
+
   }
 
   getUsersFavorites(){
     return this.apiService.getUserFavorites().subscribe((data)=>{
       this.userFavorites = data;
+      this.emptyFavorites = (this.userFavorites.length < 1);
     });
   }
 

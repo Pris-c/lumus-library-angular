@@ -6,9 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-goToLink(arg0: { "": any; }) {
-throw new Error('Method not implemented.');
-}
+
   linkedinURL: string = "https://www.linkedin.com/in/priscampos/";
   githubURL: string = "https://github.com/Pris-c";
 

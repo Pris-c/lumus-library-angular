@@ -97,7 +97,7 @@ export class ApiService {
       }),
 
       catchError((error: HttpErrorResponse) => {
-        console.log("Remove favorite error: ", error.status);
+        console.log("Remove favorite error message: ", error.message);
         return of(error.status);
       }),
     );
@@ -107,7 +107,6 @@ export class ApiService {
     return this.httpClient.post<any>('http://localhost:8080/volumes', saveRequest, {headers: new HttpHeaders('Authorization: Bearer ' + this.tokenService.getToken()), observe: 'response'})
     .pipe(
       map(response => {
-        console.log("response: " + response)
         return response.body;
       }),
 

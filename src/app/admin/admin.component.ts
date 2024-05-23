@@ -17,7 +17,8 @@ export class AdminComponent implements OnInit {
   invalidFindForm = false;
   failSave = false;
   newVolume: Volume | undefined;
-  errorMessage: string | undefined;
+  defaultMessage = "Contact the support for more information";
+  errorMessage: string = this.defaultMessage;
   volumes: Volume[] = [];
   volume: Volume | undefined;
   @Input() selectedField: string = "";
@@ -55,7 +56,7 @@ export class AdminComponent implements OnInit {
     this.newVolume = undefined;
     this.invalidForm = false;
     this.failSave = false;
-    this.errorMessage = undefined;
+    this.errorMessage = this.defaultMessage;
     if (this.form.valid) {
       const saveRequest: SaveRequest = this.form.value;
       this.save(saveRequest);
@@ -88,7 +89,7 @@ export class AdminComponent implements OnInit {
       this.volume = undefined;
       this.volumes = []
       this.invalidFindForm = false;
-      console.log(this.invalidFindForm);
+      console.log("Invalid form");
 
       if (!this.selectedField || !this.userInput) {
         this.invalidFindForm = true;
@@ -119,8 +120,7 @@ export class AdminComponent implements OnInit {
     }
 
     delete(volume: Volume){
-      console.log("delete started")
+      console.log("delete volume")
       this.apiService.delete(volume.volumeId).subscribe();
-      console.log("delete finished")
     }
 }
