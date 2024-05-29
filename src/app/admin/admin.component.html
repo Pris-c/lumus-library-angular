@@ -58,7 +58,7 @@
 
                   <section *ngIf="volume" class="card bg-light text-dark">
                     <div class="card-body d-flex justify-content-between">
-                      <div class="flex-grow-1"> <!-- Wrap card content with flex-grow-1 -->
+                      <div class="flex-grow-1">
                         <h5 class="card-title">
                           Title: {{volume.title}}
                         </h5>
@@ -70,6 +70,8 @@
                       <button (click)="delete(volume)" class="btn btn-danger">Delete</button>
                     </div>
                   </section>
+
+
                   <section *ngFor="let volume of volumes" class="card bg-light text-dark">
                     <div class="card-body d-flex justify-content-between">
                       <div class="flex-grow-1">
@@ -83,7 +85,8 @@
                       </div>
                       <button (click)="delete(volume)" class="btn btn-danger">Delete</button>
                     </div>
-                  </section>
+                </section>
+
 
                 </div>
               </div>
